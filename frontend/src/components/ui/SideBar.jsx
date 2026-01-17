@@ -90,8 +90,8 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
       {...props}
     >
       {/* Glassmorphic overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-transparent" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/[0.03] via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/[0.02] to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 h-full">{children}</div>
