@@ -4,20 +4,34 @@ import Home from "./pages/Home";
 import Events from "./pages/Events";
 import About from "./pages/About";
 // import Sessions from "./pages/Sessions";
+import Profile from "./pages/Profile";
+import AuthSuccess from "./pages/AuthSuccess";
+import AuthError from "./pages/AuthError";
+import AdminPanel from "./pages/AdminPanel";
 import XpectoSideBar from "./components/XpectoSideBar";
 import SmoothCursor from "./components/ui/SmoothCursor";
+import ProfileCompletionModal from "./components/ProfileCompletionModal";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   return (
-    <div className="overflow-x-hidden">
-      <XpectoSideBar>
-        <SmoothCursor />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </XpectoSideBar>
-    </div>
+    <AuthProvider>
+      <div className="overflow-x-hidden">
+        <XpectoSideBar>
+          <SmoothCursor />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/auth/success" element={<AuthSuccess />} />
+            <Route path="/auth/error" element={<AuthError />} />
+          </Routes>
+        </XpectoSideBar>
+        {/* Profile Completion Modal - shows after OAuth if profile is incomplete */}
+        <ProfileCompletionModal />
+      </div>
+    </AuthProvider>
   );
 }
