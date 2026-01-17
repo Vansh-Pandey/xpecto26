@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 // import Exhibition from "./pages/Exhibition";
-// import Events from "./pages/Events";
+import Events from "./pages/Events";
 // import Sessions from "./pages/Sessions";
 import XpectoSideBar from "./components/XpectoSideBar";
 import SmoothCursor from "./components/ui/SmoothCursor";
@@ -9,9 +9,10 @@ import SmoothCursor from "./components/ui/SmoothCursor";
 export default function App() {
   return (
     <XpectoSideBar>
-      <SmoothCursor/>
+      <SmoothCursor />
       <Routes>
-        <Route path="/" element={<Home />} /> 
+        <Route path="/" element={<Home />} />
+        <Route path="/events" element={<Events />} />
       </Routes>
     </XpectoSideBar>
   );

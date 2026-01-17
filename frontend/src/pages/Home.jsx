@@ -9,7 +9,7 @@ export default function Home() {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
 
   const eventDate = new Date(2026, 2, 15, 0, 0, 0);
@@ -22,17 +22,18 @@ export default function Home() {
       if (distance > 0) {
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          hours: Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          ),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000)
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
       }
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
-  const demoItems = [
-    { link: "#", text: "", image: "./logo.png" }, ]
+  const demoItems = [{ link: "#", text: "", image: "./logo.png" }];
   return (
     <div className="w-full min-h-screen relative bg-black">
       {/* Hero div */}
@@ -41,9 +42,9 @@ export default function Home() {
           backgroundImage="./bg.png"
           backgroundOpacity={0.7}
         />
-      <div className="relative  h-15 z-50">
-        <FlowingMenu items={demoItems} />
-      </div>
+        <div className="relative  h-15 z-50">
+          <FlowingMenu items={demoItems} />
+        </div>
         <div className="w-213.25 h-197.75 absolute top-0 left-1/2 -translate-x-1/2 z-10">
           <img
             src="./home_planet.png"
@@ -80,7 +81,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-5 py-3 min-w-22.5">
                 <span className="font-['Michroma'] text-4xl font-bold text-white">
-                  {String(timeLeft.days).padStart(2, '0')}
+                  {String(timeLeft.days).padStart(2, "0")}
                 </span>
               </div>
               <span className="font-['Roboto'] text-xs font-bold text-white/80 mt-2 tracking-wider">
@@ -90,7 +91,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-5 py-3 min-w-22.5">
                 <span className="font-['Michroma'] text-4xl font-bold text-white">
-                  {String(timeLeft.hours).padStart(2, '0')}
+                  {String(timeLeft.hours).padStart(2, "0")}
                 </span>
               </div>
               <span className="font-['Roboto'] text-xs font-bold text-white/80 mt-2 tracking-wider">
@@ -100,7 +101,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-5 py-3 min-w-22.5">
                 <span className="font-['Michroma'] text-4xl font-bold text-white">
-                  {String(timeLeft.minutes).padStart(2, '0')}
+                  {String(timeLeft.minutes).padStart(2, "0")}
                 </span>
               </div>
               <span className="font-['Roboto'] text-xs font-bold text-white/80 mt-2 tracking-wider">
@@ -110,7 +111,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-5 py-3 min-w-22.5">
                 <span className="font-['Michroma'] text-4xl font-bold text-white">
-                  {String(timeLeft.seconds).padStart(2, '0')}
+                  {String(timeLeft.seconds).padStart(2, "0")}
                 </span>
               </div>
               <span className="font-['Roboto'] text-xs font-bold text-white/80 mt-2 tracking-wider">
@@ -143,10 +144,6 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </div>
-
-
-
-
     </div>
   );
 }

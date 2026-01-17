@@ -41,7 +41,7 @@ export default function XpectoSideBar({ children }) {
     <div
       className={cn(
         "flex min-h-screen w-screen overflow-x-hidden",
-        "bg-[#0b0b0f]"
+        "bg-[#0b0b0f]",
       )}
     >
       {/* Subtle ambient glow */}
@@ -50,48 +50,92 @@ export default function XpectoSideBar({ children }) {
       {/* Sidebar */}
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10 bg-black/40 backdrop-blur-2xl border-r border-white/10">
-          <div className="flex flex-1 flex-col overflow-hidden relative z-10">
-
+          {/* Desktop Content */}
+          <div className="hidden md:flex flex-1 flex-col overflow-hidden relative z-10">
             {/* LOGO */}
-            <a
-              href="/"
-              className="flex items-center gap-3 px-2 py-2"
-            >
+            <a href="/" className="flex items-center gap-3 px-2 py-2">
               <img
                 src="/logo.png"
                 alt="Xpecto Logo"
-                className="h-15 w-15 object-contain"
+                className="h-12 w-12 object-contain"
               />
-
-        
             </a>
 
             {/* LINKS */}
-            <div className="mt-8 flex flex-col gap-2">
+            <div className="mt-8 flex flex-col gap-3">
               {links.map((link, idx) => (
                 <SidebarLink
                   key={idx}
                   link={{
                     ...link,
                     icon: React.cloneElement(link.icon, {
-                      className: "h-5 w-5 shrink-0 text-white",
+                      className: "h-5 w-5 shrink-0 text-cyan-300",
                     }),
                   }}
-                  className="text-white hover:bg-white/10 rounded-md px-2 transition-colors cursor-default"
+                  className="text-white text-sm"
                 />
               ))}
             </div>
           </div>
 
-          {/* SIGN UP */}
-          <SidebarLink
-            link={{
-              label: "Sign Up",
-              href: "/signup",
-              icon: <IconUserPlus className="h-5 w-5 shrink-0 text-white" />,
-            }}
-            className="text-white hover:bg-white/10 rounded-md px-2 transition-colors cursor-default"
-          />
+          {/* Desktop Sign Up */}
+          <div className="hidden md:block pt-4 mt-4 border-t border-cyan-400/20">
+            <SidebarLink
+              link={{
+                label: "Sign Up",
+                href: "/signup",
+                icon: (
+                  <IconUserPlus className="h-5 w-5 shrink-0 text-cyan-300" />
+                ),
+              }}
+              className="text-white text-sm bg-cyan-400/10 hover:bg-cyan-400/20 border border-cyan-400/30"
+            />
+          </div>
+
+          {/* Mobile Content */}
+          <div className="flex md:hidden flex-col h-full relative z-10">
+            {/* Mobile Logo */}
+            <a href="/" className="flex items-center gap-3 px-2 mb-8">
+              <img
+                src="/logo.png"
+                alt="Xpecto"
+                className="h-14 w-14 object-contain"
+              />
+              <span className="font-['Michroma'] text-xl text-white tracking-wider">
+                XPECTO
+              </span>
+            </a>
+
+            {/* Mobile Links */}
+            <div className="flex-1 flex flex-col gap-3">
+              {links.map((link, idx) => (
+                <SidebarLink
+                  key={idx}
+                  link={{
+                    ...link,
+                    icon: React.cloneElement(link.icon, {
+                      className: "h-6 w-6 shrink-0 text-cyan-300",
+                    }),
+                  }}
+                  className="text-white text-base"
+                />
+              ))}
+            </div>
+
+            {/* Mobile Sign Up */}
+            <div className="pt-6 mt-6 border-t border-cyan-400/20">
+              <SidebarLink
+                link={{
+                  label: "Sign Up",
+                  href: "/signup",
+                  icon: (
+                    <IconUserPlus className="h-6 w-6 shrink-0 text-cyan-300" />
+                  ),
+                }}
+                className="text-white text-base bg-cyan-400/10 hover:bg-cyan-400/20 border border-cyan-400/30"
+              />
+            </div>
+          </div>
         </SidebarBody>
       </Sidebar>
 
