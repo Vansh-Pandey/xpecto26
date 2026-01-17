@@ -68,7 +68,7 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
   return (
     <motion.div
       className={cn(
-        "relative min-h-screen px-4 py-6 hidden md:flex md:flex-col shrink-0",
+        "relative h-screen px-4 py-6 hidden md:flex md:flex-col shrink-0",
         "bg-gradient-to-b from-[#0a0a0f] via-[#080810] to-[#050508]",
         "border-r border-white/[0.04]",
         className,

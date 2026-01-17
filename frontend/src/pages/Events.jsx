@@ -1,16 +1,22 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   IconChevronLeft,
   IconChevronRight,
   IconSearch,
+  IconLoader2,
+  IconCheck,
 } from "@tabler/icons-react";
+import { useAuth } from "../context/AuthContext";
 
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api";
 
 export default function Events() {
+  const { user, isAuthenticated, loginWithGoogle } = useAuth();
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,6 +24,11 @@ export default function Events() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [direction, setDirection] = useState(0);
+
+  // Registration state
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [registering, setRegistering] = useState(false);
+  const [registrationCount, setRegistrationCount] = useState(0);
 
   // Generate stars once and memoize them
   const stars = useMemo(() => {
@@ -93,6 +104,91 @@ export default function Events() {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Check registration status for current event
+  useEffect(() => {
+    const checkStatus = async () => {
+      if (!isAuthenticated || !filteredEvents[currentIndex]?._id) {
+        setIsRegistered(false);
+        // We can still show the count from the event object if available, or 0
+        setRegistrationCount(
+          filteredEvents[currentIndex]?.registrations?.length || 0,
+        );
+        return;
+      }
+
+      const eventId = filteredEvents[currentIndex]._id;
+
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/events/${eventId}/register/status`,
+          {
+            credentials: "include",
+          },
+        );
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            setIsRegistered(result.data.isRegistered);
+            setRegistrationCount(result.data.registrationCount);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to check registration status:", err);
+      }
+    };
+
+    checkStatus();
+  }, [currentIndex, filteredEvents, isAuthenticated]);
+
+  const handleRegister = async () => {
+    if (!isAuthenticated) {
+      // Prompt login or redirect
+      loginWithGoogle();
+      return;
+    }
+
+    const eventId = filteredEvents[currentIndex]?._id;
+    if (!eventId) return;
+
+    try {
+      setRegistering(true);
+
+      // If already registered, deregister (optional, but good for UX)
+      // Or just register if not
+
+      const endpoint = isRegistered
+        ? `${BACKEND_URL}/events/${eventId}/register` // Use DELETE method
+        : `${BACKEND_URL}/events/${eventId}/register`; // Use POST method
+
+      const method = isRegistered ? "DELETE" : "POST";
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setIsRegistered(!isRegistered);
+        setRegistrationCount(result.data.registrationCount);
+      } else {
+        // Handle error (maybe show a toast)
+        console.error(result.message);
+        alert(result.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error("Registration action failed:", err);
+      alert("Failed to process request");
+    } finally {
+      setRegistering(false);
     }
   };
 
@@ -575,15 +671,37 @@ export default function Events() {
 
                     {/* CTA Button - Strong Visual Anchor */}
                     <motion.button
+                      onClick={handleRegister}
+                      disabled={registering}
                       whileHover={{
                         scale: 1.02,
-                        boxShadow: "0 0 50px rgba(139,92,246,0.4)",
+                        boxShadow: isRegistered
+                          ? "0 0 50px rgba(16,185,129,0.4)"
+                          : "0 0 50px rgba(139,92,246,0.4)",
                       }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full px-6 py-3 sm:py-2.5 md:py-3 bg-gradient-to-r from-purple-600/20 to-violet-600/20 border border-purple-400/50 rounded-xl text-white font-bold text-xs sm:text-sm tracking-widest hover:border-purple-300/70 hover:from-purple-600/30 hover:to-violet-600/30 transition-all duration-500 shadow-[0_0_30px_rgba(139,92,246,0.25)] mb-4 sm:mb-5 relative overflow-hidden group/btn"
+                      className={`w-full px-6 py-3 sm:py-2.5 md:py-3 border rounded-xl font-bold text-xs sm:text-sm tracking-widest transition-all duration-500 mb-4 sm:mb-5 relative overflow-hidden group/btn flex items-center justify-center gap-2 ${
+                        isRegistered
+                          ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300 hover:bg-emerald-500/30 hover:border-emerald-400/70 shadow-[0_0_30px_rgba(16,185,129,0.25)]"
+                          : "bg-gradient-to-r from-purple-600/20 to-violet-600/20 border-purple-400/50 text-white hover:border-purple-300/70 hover:from-purple-600/30 hover:to-violet-600/30 shadow-[0_0_30px_rgba(139,92,246,0.25)]"
+                      }`}
                     >
-                      <span className="relative z-10">REGISTER NOW</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/10 to-purple-500/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+                      {registering ? (
+                        <>
+                          <IconLoader2 className="w-4 h-4 animate-spin" />
+                          <span className="relative z-10">PROCESSING...</span>
+                        </>
+                      ) : isRegistered ? (
+                        <>
+                          <IconCheck className="w-4 h-4" />
+                          <span className="relative z-10">REGISTERED</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="relative z-10">REGISTER NOW</span>
+                          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/10 to-purple-500/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+                        </>
+                      )}
                     </motion.button>
 
                     {/* Metadata - Lowest Priority */}
