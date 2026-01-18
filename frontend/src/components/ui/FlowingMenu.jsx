@@ -121,14 +121,13 @@ function MenuItem({
               className="marquee-part flex items-center shrink-0"
               style={{ color: marqueeTextColor }}
             >
-              <span className="whitespace-nowrap uppercase font-normal text-[4vh] leading-none px-[1vw]">
+              <span className="whitespace-nowrap uppercase font-['Michroma'] text-[4vh] leading-none px-[1vw]">
                 {text}
               </span>
-              <div
-                className="w-50 h-[5vh] my-[2em] mx-[2vw] py-[1em] rounded-[50px]
-                     bg-cover bg-center"
-                style={{ backgroundImage: `url(${image})` }}
-              />
+              <span className="whitespace-nowrap uppercase font-['Michroma'] text-[4vh] leading-none px-[1vw]">
+                {text}
+              </span>
+              
             </div>
           ))}
         </div>

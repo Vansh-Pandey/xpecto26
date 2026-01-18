@@ -14,7 +14,7 @@ export default function Home() {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0,
+    seconds: 0
   });
 
   const eventDate = new Date(2026, 2, 14, 0, 0, 0);
@@ -27,11 +27,9 @@ export default function Home() {
       if (distance > 0) {
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-          ),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000)
         });
       }
     }, 1000);
@@ -59,6 +57,7 @@ export default function Home() {
             duration={8}
             enableParallax={false}
           >
+
             <motion.img
               src="./home_planet.png"
               alt="Planet"
@@ -70,6 +69,7 @@ export default function Home() {
           </FloatingElement>
         </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] flex flex-col items-center text-center z-20">
+ 
           <div
             className="flex w-280 h-63.75 justify-start items-center font-['Michroma'] mb-2
  text-[84px] font-light leading-[119.438px] text-white tracking-[120px]   text-left z-13 scale-[0.25] xs:scale-[0.35] sm:scale-50 md:scale-75 lg:scale-90 xl:scale-100"
@@ -80,6 +80,7 @@ export default function Home() {
             XPECTO
           </div>
 
+ 
           <motion.span
             className="flex w-232.5 h-8.5 justify-center items-center font-['Roboto'] text-[24px] font-bold leading-[32.813px] text-white  mt-2 mb-10
  text-center whitespace-nowrap z-11 scale-[0.4] xs:scale-[0.5] sm:scale-[0.65] md:scale-[0.8] lg:scale-90 xl:scale-100"
