@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import FlowingMenu from "../components/ui/FlowingMenu";
 import FloatingElement from "../components/ui/FloatingElement";
@@ -216,7 +216,7 @@ const ExhibitionCard = ({ exhibition, index }) => {
 
 export default function Exhibitions() {
   const demoItems = [
-    { link: "#", text: "XPECTO'26", image: "" },
+    { link: "#", text: "XPECTO'26", image: "./logo.png" },
   ];
 
   const exhibitions = [
@@ -255,6 +255,42 @@ export default function Exhibitions() {
         "Sustainable tech startup presentations",
         "Environmental impact workshops"
       ]
+    },
+    {
+      title: "AI & MACHINE LEARNING",
+      category: "TECHNOLOGY",
+      image: "./ai_exh.png",
+      backgroundImage: "./ai_exh.png",
+      description: "Explore the frontiers of artificial intelligence and machine learning. Witness neural networks in action, deep learning models, and the future of intelligent systems.",
+      features: [
+        "Interactive AI demos and live coding",
+        "Neural network visualization",
+        "Computer vision and NLP applications"
+      ]
+    },
+    {
+      title: "BLOCKCHAIN & WEB 3.0",
+      category: "DIGITAL",
+      image: "./blockchain_exh.png",
+      backgroundImage: "./blockchain_exh.png",
+      description: "Dive into the decentralized future with blockchain technology, smart contracts, and Web 3.0 innovations. Discover how distributed systems are reshaping the digital landscape.",
+      features: [
+        "Smart contract demonstrations",
+        "DeFi and NFT ecosystem tours",
+        "Hands-on blockchain development"
+      ]
+    },
+    {
+      title: "IoT & SMART SYSTEMS",
+      category: "CONNECTIVITY",
+      image: "./iot_exh.png",
+      backgroundImage: "./iot_exh.png",
+      description: "Experience the connected world of Internet of Things. From smart homes to industrial automation, explore how IoT is transforming everyday life and industries.",
+      features: [
+        "Smart home automation demos",
+        "Industrial IoT applications",
+        "Edge computing and sensor networks"
+      ]
     }
   ];
 
@@ -271,17 +307,20 @@ export default function Exhibitions() {
           <div className="absolute inset-0 bg-black/30" />
         </div>
         
-        {/* Fixed Planet */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-80">
+        {/* Fixed Planet - LEFT CENTER */}
+        <div className="absolute top-1/2 left-[10%] -translate-y-1/2 scale-75 md:scale-90 lg:scale-100">
           <FloatingElement
             floatIntensity={50}
             duration={12}
             enableParallax={false}
           >
-            <img
+            <motion.img
               src="./red_planet.png"
               alt="Planet"
-              className="w-full h-full object-contain"
+              className="w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] object-contain"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.2 }}
             />
           </FloatingElement>
         </div>
