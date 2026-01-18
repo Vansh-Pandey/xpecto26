@@ -98,7 +98,7 @@ export default function XpectoSideBar({ children }) {
             </Link>
 
             {/* Divider */}
-            <div className="mx-3 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent mb-4" />
+            <div className="mx-3 h-px bg-linear-to-r from-transparent via-white/6 to-transparent mb-4" />
 
             {/* Navigation Links */}
             <nav className="flex flex-col gap-1 flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300">
@@ -119,12 +119,12 @@ export default function XpectoSideBar({ children }) {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: links.length * 0.05 }}
-                  className="mt-2 pt-2 border-t border-white/[0.04]"
+                  className="mt-2 pt-2 border-t border-white/4"
                 >
                   <SidebarLink
                     link={adminLink}
                     isActive={isActive(adminLink.href)}
-                    className="bg-gradient-to-r from-orange-500/10 to-red-500/5 border border-orange-500/20 hover:border-orange-400/30"
+                    className="bg-linear-to-r from-orange-500/10 to-red-500/5 border border-orange-500/20 hover:border-orange-400/30"
                   />
                 </motion.div>
               )}
@@ -132,7 +132,7 @@ export default function XpectoSideBar({ children }) {
 
             {/* Bottom Section */}
             <div className="mt-auto pt-4">
-              <div className="mx-3 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent mb-4" />
+              <div className="mx-3 h-px bg-linear-to-r from-transparent via-white/6 to-transparent mb-4" />
 
               {loading ? (
                 <div className="flex items-center justify-center py-3">
@@ -144,16 +144,16 @@ export default function XpectoSideBar({ children }) {
                   {/* User Profile Link */}
                   <Link
                     to="/profile"
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/[0.04] transition-colors group"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/4 transition-colors group"
                   >
                     {user.avatar ? (
                       <img
                         src={user.avatar}
                         alt={user.name}
-                        className="h-8 w-8 rounded-full border border-purple-500/30 flex-shrink-0"
+                        className="h-8 w-8 rounded-full border border-purple-500/30 shrink-0"
                       />
                     ) : (
-                      <div className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500/20 to-violet-500/10 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-linear-to-br from-purple-500/20 to-violet-500/10 border border-purple-500/30 flex items-center justify-center shrink-0">
                         <span className="text-sm font-medium text-purple-300">
                           {user.name?.charAt(0) || "?"}
                         </span>
@@ -167,10 +167,10 @@ export default function XpectoSideBar({ children }) {
                       transition={{ duration: 0.15 }}
                       className="overflow-hidden"
                     >
-                      <p className="text-sm font-medium text-white/80 truncate max-w-[140px]">
+                      <p className="text-sm font-medium text-white/80 truncate max-w-35">
                         {user.name}
                       </p>
-                      <p className="text-xs text-white/40 truncate max-w-[140px]">
+                      <p className="text-xs text-white/40 truncate max-w-35">
                         {user.collegeName || user.email}
                       </p>
                     </motion.div>
@@ -181,7 +181,7 @@ export default function XpectoSideBar({ children }) {
                     onClick={logout}
                     className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-red-400/70 hover:text-red-400 hover:bg-red-500/10 transition-colors group"
                   >
-                    <IconLogout className="h-5 w-5 flex-shrink-0" />
+                    <IconLogout className="h-5 w-5 shrink-0" />
                     <motion.span
                       animate={{
                         opacity: open ? 1 : 0,
@@ -198,9 +198,9 @@ export default function XpectoSideBar({ children }) {
                 // Sign Up / Login Button
                 <button
                   onClick={loginWithGoogle}
-                  className="w-full flex items-center gap-3 px-3 py-3 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/5 border border-purple-500/20 hover:border-purple-400/30 transition-colors group"
+                  className="w-full flex items-center gap-3 px-3 py-3 rounded-xl bg-linear-to-r from-purple-500/10 to-violet-500/5 border border-purple-500/20 hover:border-purple-400/30 transition-colors group"
                 >
-                  <IconUserPlus className="h-5 w-5 text-purple-400 flex-shrink-0" />
+                  <IconUserPlus className="h-5 w-5 text-purple-400 shrink-0" />
                   <motion.span
                     animate={{
                       opacity: open ? 1 : 0,
@@ -253,12 +253,12 @@ export default function XpectoSideBar({ children }) {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + links.length * 0.05 }}
-                  className="mt-2 pt-2 border-t border-white/[0.04]"
+                  className="mt-2 pt-2 border-t border-white/4"
                 >
                   <SidebarLink
                     link={adminLink}
                     isActive={isActive(adminLink.href)}
-                    className="py-3.5 bg-gradient-to-r from-orange-500/10 to-red-500/5 border border-orange-500/20"
+                    className="py-3.5 bg-linear-to-r from-orange-500/10 to-red-500/5 border border-orange-500/20"
                   />
                 </motion.div>
               )}
@@ -269,7 +269,7 @@ export default function XpectoSideBar({ children }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="pt-4 mt-4 border-t border-white/[0.04]"
+              className="pt-4 mt-4 border-t border-white/4"
             >
               {loading ? (
                 <div className="flex items-center justify-center py-3">
@@ -281,7 +281,7 @@ export default function XpectoSideBar({ children }) {
                   {/* User Info */}
                   <Link
                     to="/profile"
-                    className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/[0.02] border border-white/[0.04]"
+                    className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/2 border border-white/4"
                   >
                     {user.avatar ? (
                       <img
@@ -290,7 +290,7 @@ export default function XpectoSideBar({ children }) {
                         className="h-10 w-10 rounded-full border border-purple-500/30"
                       />
                     ) : (
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500/20 to-violet-500/10 border border-purple-500/30 flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-full bg-linear-to-br from-purple-500/20 to-violet-500/10 border border-purple-500/30 flex items-center justify-center">
                         <span className="text-lg font-medium text-purple-300">
                           {user.name?.charAt(0) || "?"}
                         </span>
@@ -320,7 +320,7 @@ export default function XpectoSideBar({ children }) {
                 // Mobile Sign Up Button
                 <button
                   onClick={loginWithGoogle}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-3.5 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/5 border border-purple-500/20"
+                  className="w-full flex items-center justify-center gap-2 px-3 py-3.5 rounded-xl bg-linear-to-r from-purple-500/10 to-violet-500/5 border border-purple-500/20"
                 >
                   <IconUserPlus className="h-5 w-5 text-purple-400" />
                   <span className="text-sm font-medium text-white/80">

@@ -186,7 +186,7 @@ export default function AdminSessions() {
         </h2>
         <button
           onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500/20 to-red-500/10 border border-orange-500/30 rounded-xl text-orange-300 hover:bg-orange-500/30 transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-orange-500/20 to-red-500/10 border border-orange-500/30 rounded-xl text-orange-300 hover:bg-orange-500/30 transition-all"
         >
           <IconPlus className="w-5 h-5" />
           Create Session
@@ -199,7 +199,7 @@ export default function AdminSessions() {
             key={session._id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-b from-[#12121a] to-[#0a0a0f] rounded-xl border border-white/10 p-4 hover:border-orange-500/30 transition-all"
+            className="bg-linear-to-b from-[#12121a] to-[#0a0a0f] rounded-xl border border-white/10 p-4 hover:border-orange-500/30 transition-all"
           >
             {session.image?.[0] && (
               <img
@@ -229,7 +229,7 @@ export default function AdminSessions() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleEdit(session)}
-                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-white/[0.04] border border-white/10 rounded-lg text-white/80 hover:bg-white/[0.08] text-sm transition-all"
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-white/4 border border-white/10 rounded-lg text-white/80 hover:bg-white/8 text-sm transition-all"
               >
                 <IconEdit className="w-4 h-4" />
                 Edit
@@ -251,7 +251,7 @@ export default function AdminSessions() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
             onClick={() => setShowModal(false)}
           >
             <motion.div
@@ -259,11 +259,11 @@ export default function AdminSessions() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-[#12121a] to-[#0a0a0f] rounded-2xl border border-white/10 shadow-2xl"
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-linear-to-b from-[#12121a] to-[#0a0a0f] rounded-2xl border border-white/10 shadow-2xl"
             >
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute top-4 right-4 p-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] transition-colors z-10"
+                className="absolute top-4 right-4 p-2 rounded-lg bg-white/4 hover:bg-white/8 transition-colors z-10"
               >
                 <IconX className="w-5 h-5 text-white/50" />
               </button>
@@ -283,7 +283,7 @@ export default function AdminSessions() {
                       required
                       value={formData.title}
                       onChange={(e) => handleChange("title", e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                      className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                     />
                   </div>
 
@@ -298,7 +298,7 @@ export default function AdminSessions() {
                       onChange={(e) =>
                         handleChange("description", e.target.value)
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                      className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                     />
                   </div>
 
@@ -312,7 +312,7 @@ export default function AdminSessions() {
                         required
                         value={formData.venue}
                         onChange={(e) => handleChange("venue", e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
 
@@ -325,7 +325,7 @@ export default function AdminSessions() {
                         required
                         value={formData.date}
                         onChange={(e) => handleChange("date", e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
                   </div>
@@ -341,7 +341,7 @@ export default function AdminSessions() {
                         onChange={(e) =>
                           handleChange("startTime", e.target.value)
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
 
@@ -355,7 +355,7 @@ export default function AdminSessions() {
                         onChange={(e) =>
                           handleChange("endTime", e.target.value)
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
 
@@ -370,7 +370,7 @@ export default function AdminSessions() {
                         onChange={(e) =>
                           handleChange("duration", e.target.value)
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
                   </div>
@@ -386,7 +386,7 @@ export default function AdminSessions() {
                         onChange={(e) =>
                           handleChange("club_name", e.target.value)
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
 
@@ -400,7 +400,7 @@ export default function AdminSessions() {
                         onChange={(e) =>
                           handleChange("company", e.target.value)
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                       />
                     </div>
                   </div>
@@ -415,7 +415,7 @@ export default function AdminSessions() {
                       onChange={(e) =>
                         handleChange("registrationLimit", e.target.value)
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
+                      className="w-full px-4 py-3 rounded-xl bg-white/4 border border-white/10 text-white focus:outline-none focus:border-orange-500/50"
                     />
                   </div>
 
@@ -427,7 +427,7 @@ export default function AdminSessions() {
                       {formData.image.map((img, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center gap-2 p-2 bg-white/[0.02] rounded-lg"
+                          className="flex items-center gap-2 p-2 bg-white/2 rounded-lg"
                         >
                           <img
                             src={img}
@@ -459,7 +459,7 @@ export default function AdminSessions() {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium rounded-xl hover:from-orange-600 hover:to-red-600 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-linear-to-r from-orange-500 to-red-500 text-white font-medium rounded-xl hover:from-orange-600 hover:to-red-600 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {saving ? (
                       <>

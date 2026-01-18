@@ -240,13 +240,13 @@ export default function Sessions() {
         
         {/* Fixed Planet with Parallax */}
         <motion.div 
-          className="absolute top-1/2 right-[10%] -translate-y-1/2 scale-100 opacity-50"
+          className="absolute top-1/2 right-[10%] -translate-y-1/2 scale-100"
           style={{ y: planetY, rotate: planetRotate }}
         >
           <FloatingElement
-            floatIntensity={15}
+            floatIntensity={50}
             duration={10}
-            enableParallax={true}
+            enableParallax={false}
           >
             <img
               src="./blue_planet.png"

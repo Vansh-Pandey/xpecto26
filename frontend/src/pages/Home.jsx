@@ -42,10 +42,14 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen relative bg-black">
       <div className="w-full h-screen relative overflow-hidden bg-black">
-        <BackgroundRippleEffect
-          backgroundImage="./bg.png"
-          backgroundOpacity={0.7}
-        />
+         <div className="absolute inset-0">
+          <img 
+            src="./bg.png" 
+            alt="" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
 
         <div className="relative h-15 z-50">
           <FlowingMenu items={demoItems} />
