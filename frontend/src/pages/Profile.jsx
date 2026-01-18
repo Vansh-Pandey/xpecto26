@@ -117,7 +117,7 @@ export default function Profile() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-[#050508] py-8 px-4 md:px-8">
+    <div className="min-h-screen bg-[#050508] pt-14 md:pt-8 pb-8 px-4 md:px-8">
       {/* Back Button */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -149,10 +149,10 @@ export default function Profile() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="relative bg-gradient-to-b from-[#12121a] to-[#0a0a0f] rounded-2xl border border-white/10 overflow-hidden"
+          className="relative bg-linear-to-b from-[#12121a] to-[#0a0a0f] rounded-2xl border border-white/10 overflow-hidden"
         >
           {/* Header gradient */}
-          <div className="h-24 bg-gradient-to-r from-purple-500/20 via-violet-500/15 to-purple-500/20" />
+          <div className="h-24 bg-linear-to-r from-purple-500/20 via-violet-500/15 to-purple-500/20" />
 
           {/* Avatar Section */}
           <div className="px-6 pb-6">
@@ -197,7 +197,7 @@ export default function Profile() {
 
             {/* Role Badge */}
             {user.role && (
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/10 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/4 border border-white/10 mb-6">
                 <IconShieldCheck className="w-4 h-4 text-purple-400" />
                 <span className="text-sm text-white/70 capitalize">
                   {user.role}
@@ -225,7 +225,7 @@ export default function Profile() {
                     type="text"
                     value={user.name || ""}
                     disabled
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/[0.02] border border-white/5 text-white/50 cursor-not-allowed"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/2 border border-white/5 text-white/50 cursor-not-allowed"
                   />
                 </div>
                 <p className="mt-1 text-xs text-white/40">
