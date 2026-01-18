@@ -13,6 +13,7 @@ import SmoothCursor from "./components/ui/SmoothCursor";
 import ProfileCompletionModal from "./components/ProfileCompletionModal";
 import { AuthProvider } from "./context/AuthContext";
 import Exhibitions from "./pages/Exhibitions";
+import Sessions from "./pages/Sessions";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/exhibition" element={<Exhibitions />} />
+            <Route path="/sessions" element={<Sessions />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/auth/success" element={<AuthSuccess />} />
             <Route path="/auth/error" element={<AuthError />} />

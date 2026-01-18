@@ -55,7 +55,7 @@ export default function Home() {
  
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] z-10 scale-[1.8] xs:scale-[1.1] sm:scale-100 md:scale-100 lg:scale-100">
           <FloatingElement
-            floatIntensity={15}
+            floatIntensity={50}
             duration={8}
             enableParallax={false}
           >

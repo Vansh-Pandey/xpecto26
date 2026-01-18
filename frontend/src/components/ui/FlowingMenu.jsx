@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 
 function FlowingMenu({
   items = [],
-  speed = 10,
+  speed = 4,
   textColor = "#fff",
   bgColor = "#000",
   marqueeBgColor = "#fff",
@@ -97,18 +97,21 @@ function MenuItem({
   return (
     <div
       className="flex-1 relative overflow-hidden text-center"
-      style={{ borderTop: isFirst ? "none" : `1px solid ${borderColor}` }}
+      style={{
+  borderTop: isFirst ? "none" : `1px solid white`,
+  borderBottom: `1px solid white`,
+}}
+
     >
       {/* Static center text */}
       <a
         href={link}
-        className="flex items-center justify-center h-full uppercase font-semibold text-[4vh]"
+        className="flex items-center justify-center h-full uppercase font-semibold text-[2vh] xs:text-[2.5vh] sm:text-[3vh] md:text-[3.5vh] lg:text-[4vh]"
         style={{ color: textColor }}
       >
         {text}
       </a>
 
-      {/* Always-visible marquee */}
       {/* Always-visible marquee */}
       <div
         className="absolute inset-0 overflow-hidden pointer-events-none
@@ -121,13 +124,13 @@ function MenuItem({
               className="marquee-part flex items-center shrink-0"
               style={{ color: marqueeTextColor }}
             >
-              <span className="whitespace-nowrap uppercase font-['Michroma'] text-[4vh] leading-none px-[1vw]">
+              <span className="whitespace-nowrap uppercase font-['Michroma']  text-[2vh] xs:text-[2.5vh] sm:text-[3vh] md:text-[3.5vh] lg:text-[4vh] leading-none px-[1vw]">
                 {text}
               </span>
-              <span className="whitespace-nowrap uppercase font-['Michroma'] text-[4vh] leading-none px-[1vw]">
-                {text}
+              <span className="whitespace-nowrap uppercase font-['Michroma']  text-[2vh] xs:text-[2.5vh] sm:text-[3vh] md:text-[3.5vh] lg:text-[4vh] leading-none px-[1vw]">
+                {" "}
               </span>
-              
+               
             </div>
           ))}
         </div>

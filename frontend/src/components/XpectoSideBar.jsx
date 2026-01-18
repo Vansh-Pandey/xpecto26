@@ -65,7 +65,7 @@ export default function XpectoSideBar({ children }) {
     <div
       className={cn("flex h-screen w-screen overflow-hidden", "bg-[#050508]")}
     >
-      <Sidebar open={open} setOpen={setOpen}>
+      <Sidebar open={open} setOpen={setOpen} className="border-r border-white/30">
         <SidebarBody className="bg-transparent">
           {/* Desktop Content */}
           <div className="hidden md:flex flex-1 flex-col overflow-hidden">
