@@ -12,6 +12,7 @@ import XpectoSideBar from "./components/XpectoSideBar";
 import SmoothCursor from "./components/ui/SmoothCursor";
 import ProfileCompletionModal from "./components/ProfileCompletionModal";
 import { AuthProvider } from "./context/AuthContext";
+import Exhibitions from "./pages/Exhibitions";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/exhibition" element={<Exhibitions />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/auth/success" element={<AuthSuccess />} />
             <Route path="/auth/error" element={<AuthError />} />

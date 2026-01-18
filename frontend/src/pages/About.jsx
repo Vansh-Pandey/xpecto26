@@ -48,7 +48,7 @@ export default function About() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="flex items-center justify-center gap-5 mb-6"
           >
-            <span className="text-7xl md:text-9xl font-thin tracking-tight text-white/90">
+            <span className="text-7xl md:text-9xl font-['Michroma'] font-thin tracking-tight text-white/90">
               About
             </span>
             <img
