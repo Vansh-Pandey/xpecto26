@@ -234,6 +234,28 @@ export default function ProfileCompletionModal() {
             <p className="mt-4 text-center text-sm text-white/40">
               You can update this later in your profile settings
             </p>
+
+            {/* Legal Links */}
+            <div className="mt-6 pt-4 border-t border-white/10 text-center text-xs text-white/30">
+              By completing your profile, you agree to our{" "}
+              <a
+                href="/terms-of-service"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-400 hover:text-purple-300 underline"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-400 hover:text-purple-300 underline"
+              >
+                Privacy Policy
+              </a>
+            </div>
           </div>
         </motion.div>
       </motion.div>
