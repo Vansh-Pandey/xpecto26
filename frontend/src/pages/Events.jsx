@@ -23,7 +23,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
-      <div 
+      <div
         className="relative overflow-hidden rounded-3xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -38,7 +38,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
           }}
           transition={{ duration: 0.5 }}
         />
-        
+
         {/* Content Container */}
         <div className="relative flex flex-col lg:flex-row items-stretch gap-0 overflow-hidden">
           {/* Left Side - Image Section */}
@@ -66,7 +66,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                   </>
                 )}
               </div>
-              
+
               {/* Main Event Image */}
               <div className="relative h-full flex items-center justify-center p-8">
                 <motion.div
@@ -86,7 +86,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                         <span className="text-white/50 text-sm">No Image</span>
                       </div>
                     )}
-                    
+
                     {/* Glow effect */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"
@@ -94,7 +94,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                       transition={{ duration: 0.5 }}
                     />
                   </div>
-                  
+
                   {/* Corner accents */}
                   <motion.div
                     className="absolute -top-3 -left-3 w-12 h-12 border-t-4 border-l-4 border-white rounded-tl-lg"
@@ -160,7 +160,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                 >
                   {event.title}
                 </motion.h3>
-                
+
                 {/* Underline accent */}
                 <motion.div
                   className="h-1 bg-gradient-to-r from-white via-gray-300 to-transparent rounded-full"
@@ -266,14 +266,14 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                     whileHover={{ x: "-100%" }}
                     transition={{ duration: 0.7, ease: "easeInOut" }}
                   />
-                  
+
                   {/* Glow effect */}
                   <motion.div
                     className={`absolute inset-0 ${isRegistered ? 'bg-emerald-400/40' : 'bg-white/40'} blur-xl`}
                     animate={{ opacity: isHovered ? 0.5 : 0 }}
                     transition={{ duration: 0.3 }}
                   />
-                  
+
                   <span className="relative z-10 flex items-center justify-center gap-3 text-base tracking-wider text-black font-bold">
                     {registering ? (
                       <>
@@ -473,31 +473,32 @@ export default function Events() {
       {/* Fixed Background Section */}
       <div className="fixed top-0 left-0 w-full h-screen z-0">
         <div className="absolute inset-0">
-          <img 
-            src="./bg4.png" 
-            alt="" 
+          <img
+            src="./bg5.png"
+            alt=""
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30" />
         </div>
-        
+
         {/* Fixed Planet - RIGHT CENTER */}
-        <div className="absolute top-1/2 left-[10%] -translate-y-1/2 scale-75 md:scale-90 lg:scale-100">
-                  <FloatingElement
-                    floatIntensity={50}
-                    duration={12}
-                    enableParallax={false}
-                  >
-                    <motion.img
-                      src="./golden_planet.png"
-                      alt="Planet"
-                      className="w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] object-contain"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 1.2, delay: 0.2 }}
-                    />
-                  </FloatingElement>
-                </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-75 md:scale-90 lg:scale-100">
+
+          <FloatingElement
+            floatIntensity={50}
+            duration={12}
+            enableParallax={false}
+          >
+            <motion.img
+              src="./void_planet.png"
+              alt="Planet"
+              className="w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] object-contain"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+            />
+          </FloatingElement>
+        </div>
       </div>
 
       {/* Scrollable Content */}
@@ -531,7 +532,7 @@ export default function Events() {
             >
               EVENTS
             </motion.h1>
-            
+
             <motion.div
               className="h-1 w-48 mx-auto bg-gradient-to-r from-transparent via-white to-transparent mb-8"
               initial={{ scaleX: 0 }}
@@ -715,11 +716,10 @@ export default function Events() {
                         }}
                         whileHover={{ scale: idx === currentIndex ? 1.3 : 1.1 }}
                         transition={{ duration: 0.3 }}
-                        className={`h-2 rounded-full transition-all duration-500 ${
-                          idx === currentIndex
+                        className={`h-2 rounded-full transition-all duration-500 ${idx === currentIndex
                             ? "w-10 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                             : "w-2 bg-white/30 hover:bg-white/50"
-                        }`}
+                          }`}
                       />
                     ))}
                   </div>

@@ -40,8 +40,8 @@ export default function Home() {
   const demoItems = [{ link: "#", text: "XPECTO'26", image: "./logo.png" }];
 
   return (
-    <div className="w-full min-h-screen relative bg-black">
-      <div className="w-full h-screen relative overflow-hidden bg-black">
+    <div className="w-full min-h-screen relative *:">
+      <div className="w-full h-screen relative overflow-hidden  ">
          <div className="absolute inset-0">
           <img 
             src="./bg.png" 

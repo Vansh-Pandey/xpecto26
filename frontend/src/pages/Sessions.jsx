@@ -44,7 +44,7 @@ const SessionCard = ({ session, index }) => {
             transition={{ duration: 0.6 }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black" />
-          
+
           {/* Floating time badge */}
           <motion.div
             className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm"
@@ -230,16 +230,16 @@ export default function Sessions() {
       {/* Fixed Background Section */}
       <div className="fixed top-0 left-0 w-full h-screen z-0">
         <div className="absolute inset-0">
-          <img 
-            src="./bg3.png" 
-            alt="" 
+          <img
+            src="./bg3.png"
+            alt=""
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
-        
+
         {/* Fixed Planet with Parallax */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/2 right-[10%] -translate-y-1/2 scale-100"
           style={{ y: planetY, rotate: planetRotate }}
         >
@@ -248,10 +248,13 @@ export default function Sessions() {
             duration={10}
             enableParallax={false}
           >
-            <img
+            <motion.img
               src="./blue_planet.png"
               alt="Planet"
               className="w-[600px] h-[600px] object-contain"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.2 }}
             />
           </FloatingElement>
         </motion.div>
@@ -293,7 +296,7 @@ export default function Sessions() {
             >
               SESSIONS
             </motion.h1>
-            
+
             <motion.div
               className="h-1 w-48 mx-auto bg-gradient-to-r from-transparent via-white to-transparent mb-8"
               initial={{ scaleX: 0 }}
