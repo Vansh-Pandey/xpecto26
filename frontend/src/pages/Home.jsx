@@ -37,22 +37,20 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  const demoItems = [
-    { link: "#", text: "XPECTO'26", image: "./logo.png" },
-  ];
+  const demoItems = [{ link: "#", text: "XPECTO'26", image: "./logo.png" }];
 
   return (
-    <div className="w-full min-h-screen relative bg-black"> 
-      <div className="w-full h-screen relative overflow-hidden bg-black"> 
+    <div className="w-full min-h-screen relative bg-black">
+      <div className="w-full h-screen relative overflow-hidden bg-black">
         <BackgroundRippleEffect
           backgroundImage="./bg.png"
           backgroundOpacity={0.7}
-        /> 
- 
+        />
+
         <div className="relative h-15 z-50">
           <FlowingMenu items={demoItems} />
         </div>
- 
+
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] z-10 scale-[1.8] xs:scale-[1.1] sm:scale-100 md:scale-100 lg:scale-100">
           <FloatingElement
             floatIntensity={15}
@@ -81,6 +79,7 @@ export default function Home() {
           >
             XPECTO
           </div>
+
  
           <motion.span
             className="flex w-232.5 h-8.5 justify-center items-center font-['Roboto'] text-[24px] font-bold leading-[32.813px] text-white  mt-2 mb-10
@@ -91,26 +90,28 @@ export default function Home() {
               duration: 0.8,
               delay: 0.8,
               type: "spring",
-              stiffness: 100
+              stiffness: 100,
             }}
           >
             BIGGEST TECHFEST OF HIMALAYAS
           </motion.span>
- 
+
           <motion.div
             className=" mt-2
  z-20 scale-[0.5] xs:scale-[0.6] sm:scale-[0.7] md:scale-[0.85] lg:scale-95 xl:scale-100"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-          > 
-            <div className="mt-2
- flex gap-6 justify-center items-center  mb-5">
+          >
+            <div
+              className="mt-2
+ flex gap-6 justify-center items-center  mb-5"
+            >
               <AnimatedCounter value={timeLeft.days} label="DAYS" />
               <AnimatedCounter value={timeLeft.hours} label="HOURS" />
               <AnimatedCounter value={timeLeft.minutes} label="MINUTES" />
               <AnimatedCounter value={timeLeft.seconds} label="SECONDS" />
-            </div> 
+            </div>
             <motion.div
               className="text-center mb-5 mt-2
  "
@@ -122,7 +123,7 @@ export default function Home() {
                 MARCH 14-16, 2026
               </p>
             </motion.div>
- 
+
             <motion.div
               className="flex justify-center mt-2
  "
@@ -130,9 +131,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.7 }}
             >
-              <MagneticButton magnetStrength={0.3}>
-                LEARN MORE
-              </MagneticButton>
+              <MagneticButton magnetStrength={0.3}>LEARN MORE</MagneticButton>
             </motion.div>
           </motion.div>
         </div>

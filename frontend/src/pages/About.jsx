@@ -1,14 +1,20 @@
 "use client";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   IconMail,
   IconMapPin,
   IconBrandInstagram,
   IconCode,
   IconArrowUpRight,
+  IconUsers,
 } from "@tabler/icons-react";
 
 export default function About() {
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const developers = [
     { name: "Divyansh Jindal", role: "Full Stack Developer" },
     { name: "Vansh Pandey", role: "Full Stack Developer" },
@@ -26,10 +32,39 @@ export default function About() {
     { label: "contact@xpecto.org", href: "mailto:contact@xpecto.org" },
   ];
 
+  // Fetch team members from backend
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        setLoading(true);
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+        const response = await fetch(`${apiUrl}/team`, {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch team members");
+        }
+
+        const result = await response.json();
+        if (result.success) {
+          setTeamMembers(result.data);
+        }
+      } catch (err) {
+        console.error("Error fetching team members:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamMembers();
+  }, []);
+
   return (
-    <div className="w-full min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="w-full min-h-screen bg-black text-white overflow-x-hidden pt-14 md:pt-0">
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Planet Background - positioned element, not fixed */}
         <div className="absolute inset-0">
           <img
@@ -46,15 +81,15 @@ export default function About() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex items-center justify-center gap-5 mb-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mb-6"
           >
-            <span className="text-7xl md:text-9xl font-['Michroma'] font-thin tracking-tight text-white/90">
+            <span className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-thin tracking-tight text-white/90">
               About
             </span>
             <img
               src="/logo.png"
               alt="Xpecto"
-              className="h-50 md:h-28 w-20 md:w-28 object-contain"
+              className="h-16 w-16 sm:h-20 sm:w-20 md:h-28 md:w-28 object-contain"
             />
           </motion.div>
           <motion.p
@@ -85,8 +120,8 @@ export default function About() {
       </section>
 
       {/* Content Grid */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
           {/* Location Card - Large */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -194,12 +229,12 @@ export default function About() {
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.289193080827!2d77.01885731512302!3d31.778448081269743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39048708163fd03f%3A0x8129a80ee5d5950b!2sIndian%20Institute%20of%20Technology%20Mandi!5e0!3m2!1sen!2sin!4v1621234567890!5m2!1sen!2sin"
               width="100%"
-              height="400"
+              height="300"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="grayscale invert-[0.9] opacity-80 hover:opacity-100 transition-opacity duration-500"
+              className="grayscale invert-[0.9] opacity-80 hover:opacity-100 transition-opacity duration-500 md:h-[400px]"
             />
           </motion.div>
 
@@ -232,24 +267,127 @@ export default function About() {
         </div>
       </section>
 
+      {/* Team Section */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 md:py-20 border-t border-white/5">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-8 sm:mb-12"
+        >
+          <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <IconUsers className="w-6 h-6 sm:w-8 sm:h-8 text-white/40" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">Our Team</h2>
+          </div>
+          <p className="text-white/50 text-base sm:text-lg">
+            Meet the people who make Xpecto happen
+          </p>
+        </motion.div>
+
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 border-4 border-white/10 rounded-full" />
+              <div className="absolute inset-0 border-4 border-t-cyan-500/50 rounded-full animate-spin" />
+            </div>
+          </div>
+        ) : error ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-red-500/10 border border-red-500/20 rounded-2xl p-8 text-center"
+          >
+            <p className="text-red-400">
+              Unable to load team members. Please try again later.
+            </p>
+          </motion.div>
+        ) : teamMembers.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 text-center"
+          >
+            <p className="text-white/40">No team members to display yet.</p>
+          </motion.div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {teamMembers.map((member, idx) => (
+              <motion.div
+                key={member._id || idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 group"
+              >
+                {/* Member Image */}
+                <div className="relative mb-6">
+                  <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-white/10">
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-6xl font-light text-white/20">
+                        {member.name?.charAt(0) || "?"}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Member Info */}
+                <div className="space-y-2">
+                  <h3 className="text-xl font-medium group-hover:text-cyan-400 transition-colors">
+                    {member.name}
+                  </h3>
+                  <p className="text-white/60 text-sm uppercase tracking-wide">
+                    {member.team}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/30">© 2026 Xpecto, IIT Mandi</p>
-          <div className="flex items-center gap-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+            <p className="text-sm text-white/30">© 2026 Xpecto, IIT Mandi</p>
+            <div className="flex items-center gap-6">
+              <a
+                href="mailto:tech@xpecto.org"
+                className="text-sm text-white/30 hover:text-white/60 transition-colors"
+              >
+                Tech Support
+              </a>
+              <a
+                href="https://instagram.com/xpecto_iitmandi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/30 hover:text-white/60 transition-colors"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-6 pt-4 border-t border-white/5">
             <a
-              href="mailto:tech@xpecto.org"
-              className="text-sm text-white/30 hover:text-white/60 transition-colors"
+              href="/terms-of-service"
+              className="text-xs text-white/30 hover:text-white/60 transition-colors"
             >
-              Tech Support
+              Terms of Service
             </a>
+            <span className="text-white/20">•</span>
             <a
-              href="https://instagram.com/xpecto_iitmandi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-white/30 hover:text-white/60 transition-colors"
+              href="/privacy-policy"
+              className="text-xs text-white/30 hover:text-white/60 transition-colors"
             >
-              Instagram
+              Privacy Policy
             </a>
           </div>
         </div>
