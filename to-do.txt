@@ -1,6 +1,3 @@
-sidebar instead of navbar(top)
-https://ui.aceternity.com/components/animated-modal
-https://ui.aceternity.com/components/following-pointer
-https://magicui.design/docs/components/smooth-cursor
-https://magicui.design/docs/components/cool-mode
-https://magicui.design/docs/components/dock
+responsivness
+all links working 
+more designing elements

@@ -11,6 +11,7 @@ import {
 } from "@tabler/icons-react";
 import { useAuth } from "../context/AuthContext";
 import FloatingElement from "../components/ui/FloatingElement";
+import FlowingMenu from "../components/ui/FlowingMenu";
 
 const BACKEND_URL =
   import.meta.env.BACKEND_URL || "https://xpecto.iitmandi.co.in/api";
@@ -474,6 +475,7 @@ export default function Events() {
     }),
   };
 
+  const demoItems = [{ link: "#", text: "XPECTO'26", image: "./logo.png" }];
   return (
     <div className="w-full min-h-screen relative bg-black">
       {/* Fixed Background Section */}
@@ -482,7 +484,9 @@ export default function Events() {
           <img src="./bg5.png" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/30" />
         </div>
-
+      <div className="relative h-15 z-50">
+                <FlowingMenu items={demoItems} />
+              </div>
         {/* Fixed Planet - RIGHT CENTER */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-75 md:scale-90 lg:scale-100">
           <FloatingElement
