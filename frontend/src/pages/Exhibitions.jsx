@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FlowingMenu from "../components/ui/FlowingMenu";
 import FloatingElement from "../components/ui/FloatingElement";
 
@@ -140,35 +140,53 @@ const ExhibitionCard = ({ exhibition, index }) => {
               <p className="font-['Roboto'] text-gray-300 text-base lg:text-lg leading-relaxed">
                 {exhibition.description}
               </p>
-
-              {/* Features List with enhanced styling */}
-              <div className="space-y-3 pt-4">
-                {exhibition.features.map((feature, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="flex items-start gap-4 group"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 * idx, duration: 0.5 }}
-                  >
-                    <div className="relative mt-1">
-                      <motion.div
-                        className="w-2 h-2 rounded-full bg-white"
-                        whileHover={{ scale: 1.5 }}
-                      />
-                      <motion.div
-                        className="absolute inset-0 w-2 h-2 rounded-full bg-white"
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      />
+              
+              {/* Venue & Date - Added since backend provides date and venue */}
+              {(exhibition.venue || exhibition.date) && (
+                <div className="flex flex-wrap gap-4 text-sm font-['Roboto'] text-gray-400">
+                  {exhibition.venue && (
+                     <div className="flex items-center gap-2">
+                       <span className="text-cyan-300">📍</span> {exhibition.venue}
+                     </div>
+                  )}
+                  {exhibition.date && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-cyan-300">📅</span> {new Date(exhibition.date).toLocaleDateString()}
                     </div>
-                    <span className="font-['Roboto'] text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                      {feature}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
+                  )}
+                </div>
+              )}
+
+              {/* Features List with enhanced styling - Conditional rendering */}
+              {exhibition.features && exhibition.features.length > 0 && (
+                <div className="space-y-3 pt-4">
+                  {exhibition.features.map((feature, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="flex items-start gap-4 group"
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * idx, duration: 0.5 }}
+                    >
+                      <div className="relative mt-1">
+                        <motion.div
+                          className="w-2 h-2 rounded-full bg-white"
+                          whileHover={{ scale: 1.5 }}
+                        />
+                        <motion.div
+                          className="absolute inset-0 w-2 h-2 rounded-full bg-white"
+                          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      </div>
+                      <span className="font-['Roboto'] text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
+                        {feature}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
 
               {/* CTA Button with enhanced design */}
               <div className="pt-6">
@@ -219,80 +237,55 @@ export default function Exhibitions() {
     { link: "#", text: "XPECTO'26", image: "./logo.png" },
   ];
 
-  const exhibitions = [
-    {
-      title: "ROBOTICS SHOWCASE",
-      category: "INNOVATION",
-      image: "./robotic_exh.png",
-      backgroundImage: "./robotic_exh.png",
-      description: "Witness the future of automation and artificial intelligence with cutting-edge robotic demonstrations. Experience interactive robots, autonomous systems, and the latest in mechanical engineering.",
-      features: [
-        "Live robot demonstrations and competitions",
-        "Interactive AI-powered installations",
-        "Hands-on workshops with industry experts"
-      ]
-    },
-    {
-      title: "SPACE TECH EXPO",
-      category: "EXPLORATION",
-      image: "./space_tech_exh.png",
-      backgroundImage: "./space_tech_exh.png",
-      description: "Journey through the cosmos with our immersive space technology exhibition. Explore satellite systems, rocket propulsion, and the latest developments in space exploration.",
-      features: [
-        "Satellite model displays and demonstrations",
-        "Virtual reality space missions",
-        "Meet aerospace engineers and scientists"
-      ]
-    },
-    {
-      title: "GREEN ENERGY HUB",
-      category: "SUSTAINABILITY",
-      image: "./green_exh.png",
-      backgroundImage: "./green_exh.png",
-      description: "Discover sustainable solutions for tomorrow's energy challenges. From solar innovations to wind power breakthroughs, explore the technologies shaping a greener future.",
-      features: [
-        "Renewable energy prototypes and models",
-        "Sustainable tech startup presentations",
-        "Environmental impact workshops"
-      ]
-    },
-    {
-      title: "AI & MACHINE LEARNING",
-      category: "TECHNOLOGY",
-      image: "./ai_exh.png",
-      backgroundImage: "./ai_exh.png",
-      description: "Explore the frontiers of artificial intelligence and machine learning. Witness neural networks in action, deep learning models, and the future of intelligent systems.",
-      features: [
-        "Interactive AI demos and live coding",
-        "Neural network visualization",
-        "Computer vision and NLP applications"
-      ]
-    },
-    {
-      title: "BLOCKCHAIN & WEB 3.0",
-      category: "DIGITAL",
-      image: "./blockchain_exh.png",
-      backgroundImage: "./blockchain_exh.png",
-      description: "Dive into the decentralized future with blockchain technology, smart contracts, and Web 3.0 innovations. Discover how distributed systems are reshaping the digital landscape.",
-      features: [
-        "Smart contract demonstrations",
-        "DeFi and NFT ecosystem tours",
-        "Hands-on blockchain development"
-      ]
-    },
-    {
-      title: "IoT & SMART SYSTEMS",
-      category: "CONNECTIVITY",
-      image: "./iot_exh.png",
-      backgroundImage: "./iot_exh.png",
-      description: "Experience the connected world of Internet of Things. From smart homes to industrial automation, explore how IoT is transforming everyday life and industries.",
-      features: [
-        "Smart home automation demos",
-        "Industrial IoT applications",
-        "Edge computing and sensor networks"
-      ]
-    }
-  ];
+  const [exhibitions, setExhibitions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "https://xpecto.iitmandi.co.in/api";
+
+  useEffect(() => {
+    const fetchExhibitions = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${API_BASE_URL}/exhibitions`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch exhibitions');
+        }
+        const data = await response.json();
+        
+        if (data.success) {
+          const transformedData = data.data.map(item => {
+            // Pick a random default image if none are provided
+            const defaultImages = [
+              "./robotic_exh.png", 
+              "./space_tech_exh.png", 
+              "./green_exh.png", 
+              "./ai_exh.png",
+              "./blockchain_exh.png",
+              "./iot_exh.png"
+            ];
+            const randomImage = defaultImages[Math.floor(Math.random() * defaultImages.length)];
+            
+            return {
+              ...item,
+              image: (item.image && item.image.length > 0) ? item.image[0] : randomImage,
+              backgroundImage: (item.image && item.image.length > 0) ? item.image[0] : randomImage,
+              category: item.club_name || item.company || "TECHNOLOGY",
+              features: [] // Empty features array as it's not in the DB model
+            };
+          });
+          setExhibitions(transformedData);
+        }
+      } catch (err) {
+        console.error("Error fetching exhibitions:", err);
+        setError("Failed to load exhibitions. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExhibitions();
+  }, []);
 
   return (
     <div className="w-full min-h-screen relative bg-black">
@@ -383,13 +376,27 @@ export default function Exhibitions() {
 
         {/* Exhibition Cards */}
         <div className="relative px-6 pb-24">
-          {exhibitions.map((exhibition, index) => (
-            <ExhibitionCard
-              key={index}
-              exhibition={exhibition}
-              index={index}
-            />
-          ))}
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="text-white text-xl font-['Roboto'] animate-pulse">Loading exhibitions...</div>
+            </div>
+          ) : error ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="text-red-400 text-xl font-['Roboto']">{error}</div>
+            </div>
+          ) : exhibitions.length === 0 ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="text-gray-400 text-xl font-['Roboto']">No exhibitions found.</div>
+            </div>
+          ) : (
+            exhibitions.map((exhibition, index) => (
+              <ExhibitionCard
+                key={index}
+                exhibition={exhibition}
+                index={index}
+              />
+            ))
+          )}
         </div>
 
         {/* Footer Section */}

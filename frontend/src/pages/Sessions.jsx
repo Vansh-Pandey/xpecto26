@@ -1,13 +1,17 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import FlowingMenu from "../components/ui/FlowingMenu";
 import FloatingElement from "../components/ui/FloatingElement";
 
 const SessionCard = ({ session, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
+
+  // Format time if available, otherwise use a placeholder or computed duration
+  const displayTime = session.time || 
+    (session.startTime ? `${session.startTime} - ${session.endTime}` : "TBA");
 
   return (
     <motion.div
@@ -53,7 +57,7 @@ const SessionCard = ({ session, index }) => {
             transition={{ duration: 0.3 }}
           >
             <span className="font-['Roboto'] text-xs font-bold text-black tracking-wider">
-              {session.time}
+              {displayTime}
             </span>
           </motion.div>
 
@@ -96,26 +100,28 @@ const SessionCard = ({ session, index }) => {
             </p>
           </motion.div>
 
-          {/* Speaker info */}
-          <motion.div
-            className="flex items-center gap-3 pt-2"
-            animate={{ opacity: isHovered ? 1 : 0.8 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-gray-400 flex items-center justify-center">
-              <span className="font-['Roboto'] text-black font-bold text-sm">
-                {session.speaker.charAt(0)}
-              </span>
-            </div>
-            <div>
-              <p className="font-['Roboto'] text-white text-sm font-semibold">
-                {session.speaker}
-              </p>
-              <p className="font-['Roboto'] text-gray-500 text-xs">
-                {session.role}
-              </p>
-            </div>
-          </motion.div>
+          {/* Venue (replaces Speaker info if speaker not present) */}
+          {(session.venue || session.speaker) && (
+             <motion.div
+             className="flex items-center gap-3 pt-2"
+             animate={{ opacity: isHovered ? 1 : 0.8 }}
+             transition={{ duration: 0.3 }}
+           >
+             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-gray-400 flex items-center justify-center">
+               <span className="font-['Roboto'] text-black font-bold text-sm">
+                 {(session.speaker || session.venue || "X").charAt(0)}
+               </span>
+             </div>
+             <div>
+               <p className="font-['Roboto'] text-white text-sm font-semibold">
+                 {session.speaker || session.venue}
+               </p>
+               <p className="font-['Roboto'] text-gray-500 text-xs">
+                 {session.role || "Venue"}
+               </p>
+             </div>
+           </motion.div>
+          )}
 
           {/* Learn more link */}
           <motion.div
@@ -168,62 +174,78 @@ export default function Sessions() {
     { link: "#", text: "XPECTO'26", image: "" },
   ];
 
-  const sessions = [
-    {
-      title: "AI & MACHINE LEARNING",
-      category: "KEYNOTE",
-      time: "10:00 AM",
-      image: "./ai_session.png",
-      description: "Dive deep into the world of artificial intelligence and machine learning. Explore cutting-edge algorithms, neural networks, and real-world applications transforming industries.",
-      speaker: "Dr. Sarah Chen",
-      role: "AI Research Lead, TechCorp"
-    },
-    {
-      title: "BLOCKCHAIN REVOLUTION",
-      category: "WORKSHOP",
-      time: "2:00 PM",
-      image: "./blockchain_session.png",
-      description: "Discover how blockchain technology is revolutionizing finance, supply chain, and digital identity. Learn about smart contracts and decentralized applications.",
-      speaker: "Alex Kumar",
-      role: "Blockchain Architect"
-    },
-    {
-      title: "QUANTUM COMPUTING",
-      category: "SEMINAR",
-      time: "4:30 PM",
-      image: "./quantum_session.png",
-      description: "Explore the fascinating world of quantum computing and its potential to solve complex problems beyond classical computer capabilities.",
-      speaker: "Prof. Michael Zhang",
-      role: "Quantum Physicist"
-    },
-    {
-      title: "CYBERSECURITY TRENDS",
-      category: "PANEL",
-      time: "11:30 AM",
-      image: "./cyber_session.png",
-      description: "Stay ahead of cyber threats with insights into modern security practices, ethical hacking, and protecting digital infrastructure in an interconnected world.",
-      speaker: "Lisa Rodriguez",
-      role: "Security Consultant"
-    },
-    {
-      title: "FUTURE OF IoT",
-      category: "TALK",
-      time: "3:00 PM",
-      image: "./iot_session.png",
-      description: "Understand how Internet of Things is connecting our world. From smart homes to industrial automation, discover the endless possibilities of connected devices.",
-      speaker: "James Park",
-      role: "IoT Solutions Engineer"
-    },
-    {
-      title: "SUSTAINABLE TECH",
-      category: "WORKSHOP",
-      time: "1:00 PM",
-      image: "./sustainable_session.png",
-      description: "Learn about green technologies and sustainable practices in tech. Explore renewable energy solutions and eco-friendly innovations for a better tomorrow.",
-      speaker: "Emma Thompson",
-      role: "Environmental Tech Lead"
-    }
-  ];
+  const [sessions, setSessions] = useState([]);
+  const [groupedSessions, setGroupedSessions] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "https://xpecto.iitmandi.co.in/api";
+
+  useEffect(() => {
+    const fetchSessions = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${API_BASE_URL}/sessions`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch sessions');
+        }
+        const data = await response.json();
+
+        if (data.success) {
+          const defaultImages = [
+            "./ai_session.png",
+            "./blockchain_session.png",
+            "./quantum_session.png",
+            "./cyber_session.png",
+            "./iot_session.png",
+            "./sustainable_session.png"
+          ];
+
+          const transformedData = data.data.map(item => {
+            const randomImage = defaultImages[Math.floor(Math.random() * defaultImages.length)];
+            return {
+              ...item,
+              image: (item.image && item.image.length > 0) ? item.image[0] : randomImage,
+              category: item.club_name || item.company || "SESSION",
+            };
+          });
+          setSessions(transformedData);
+
+          // Group by Date
+          const groups = {};
+          // Sort by date first to ensure order is correct if backend didn't
+          transformedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+          transformedData.forEach(session => {
+            const dateObj = new Date(session.date);
+            if (isNaN(dateObj.getTime())) return;
+            
+            // Format: MARCH 14
+            const dateKey = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }).toUpperCase();
+            
+            if (!groups[dateKey]) {
+              groups[dateKey] = [];
+            }
+            groups[dateKey].push(session);
+          });
+
+          // If grouping failed (e.g. no valid dates), fallback
+          if (Object.keys(groups).length === 0 && transformedData.length > 0) {
+             groups["UPCOMING SESSIONS"] = transformedData;
+          }
+
+          setGroupedSessions(groups);
+        }
+      } catch (err) {
+        console.error("Error fetching sessions:", err);
+        setError("Failed to load sessions. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSessions();
+  }, []);
 
   return (
     <div ref={containerRef} className="w-full min-h-screen relative bg-black">
@@ -322,57 +344,46 @@ export default function Sessions() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            {/* Day 1 */}
-            <div className="mb-16">
-              <motion.div
-                className="flex items-center gap-4 mb-8"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                  <span className="font-['Roboto'] text-sm font-bold text-white tracking-widest">
-                    DAY 1 • MARCH 14
-                  </span>
-                </div>
-                <div className="flex-1 h-px bg-gradient-to-r from-white/50 to-transparent" />
-              </motion.div>
+            {loading ? (
+               <div className="flex justify-center items-center h-64">
+                 <div className="text-white text-xl font-['Roboto'] animate-pulse">Loading sessions...</div>
+               </div>
+            ) : error ? (
+               <div className="flex justify-center items-center h-64">
+                 <div className="text-red-400 text-xl font-['Roboto']">{error}</div>
+               </div>
+            ) : Object.keys(groupedSessions).length === 0 ? (
+               <div className="flex justify-center items-center h-64">
+                 <div className="text-gray-400 text-xl font-['Roboto']">No sessions found.</div>
+               </div>
+            ) : (
+              Object.entries(groupedSessions).map(([dateLabel, dateSessions], groupIndex) => (
+                <div className="mb-16" key={groupIndex}>
+                  <motion.div
+                    className="flex items-center gap-4 mb-8"
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                      <span className="font-['Roboto'] text-sm font-bold text-white tracking-widest">
+                        {dateLabel}
+                      </span>
+                    </div>
+                    <div className="flex-1 h-px bg-gradient-to-r from-white/50 to-transparent" />
+                  </motion.div>
 
-              <div className="overflow-x-auto scrollbar-hide">
-                <div className="flex gap-6 pb-4 px-2">
-                  {sessions.slice(0, 3).map((session, index) => (
-                    <SessionCard key={index} session={session} index={index} />
-                  ))}
+                  <div className="overflow-x-auto scrollbar-hide">
+                    <div className="flex gap-6 pb-4 px-2">
+                      {dateSessions.map((session, index) => (
+                        <SessionCard key={session._id || index} session={session} index={index} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Day 2 */}
-            <div className="mb-16">
-              <motion.div
-                className="flex items-center gap-4 mb-8"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                  <span className="font-['Roboto'] text-sm font-bold text-white tracking-widest">
-                    DAY 2 • MARCH 15
-                  </span>
-                </div>
-                <div className="flex-1 h-px bg-gradient-to-r from-white/50 to-transparent" />
-              </motion.div>
-
-              <div className="overflow-x-auto scrollbar-hide">
-                <div className="flex gap-6 pb-4 px-2">
-                  {sessions.slice(3, 6).map((session, index) => (
-                    <SessionCard key={index + 3} session={session} index={index} />
-                  ))}
-                </div>
-              </div>
-            </div>
+              ))
+            )}
           </motion.div>
         </div>
 
