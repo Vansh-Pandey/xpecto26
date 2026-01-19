@@ -37,7 +37,8 @@ export default function About() {
     const fetchTeamMembers = async () => {
       try {
         setLoading(true);
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+        const apiUrl =
+          import.meta.env.VITE_API_URL || "https://xpecto.iitmandi.co.in/api";
         const response = await fetch(`${apiUrl}/team`, {
           credentials: "include",
         });
@@ -62,18 +63,14 @@ export default function About() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen relative bg-black">
+    <div className="w-full min-h-screen relative bg-[#050508]">
       {/* Fixed Background Section */}
       <div className="fixed top-0 left-0 w-full h-screen z-0">
         <div className="absolute inset-0">
-          <img 
-            src="./bg4.png" 
-            alt="" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/30" />
+          <img src="./bg4.png" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/70" />
         </div>
-        
+
         {/* Fixed Planet - LEFT CENTER */}
         <div className="absolute top-1/2 left-[10%] -translate-y-1/2 scale-75 md:scale-90 lg:scale-100">
           <motion.div
@@ -126,7 +123,7 @@ export default function About() {
             >
               ABOUT
             </motion.h1>
-            
+
             <motion.div
               className="h-1 w-48 mx-auto bg-gradient-to-r from-transparent via-white to-transparent mb-8"
               initial={{ scaleX: 0 }}
@@ -154,7 +151,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="md:col-span-7 backdrop-blur-sm bg-black/40 border border-white/10 rounded-3xl p-8 hover:bg-black/50 hover:border-white/20 transition-all duration-500 shadow-2xl"
+              className="md:col-span-7 backdrop-blur-md bg-black/60 border border-white/10 rounded-3xl p-8 hover:bg-black/70 hover:border-white/20 transition-all duration-500 shadow-2xl"
             >
               <div className="flex items-start justify-between mb-8">
                 <IconMapPin className="w-8 h-8 text-white/40" />
@@ -162,7 +159,9 @@ export default function About() {
                   Location
                 </span>
               </div>
-              <h3 className="font-['Michroma'] text-3xl md:text-4xl font-light mb-4 text-white">IIT Mandi</h3>
+              <h3 className="font-['Michroma'] text-3xl md:text-4xl font-light mb-4 text-white">
+                IIT Mandi
+              </h3>
               <p className="font-['Roboto'] text-white/50 text-lg leading-relaxed mb-6">
                 Kamand, Himachal Pradesh
                 <br />
@@ -185,7 +184,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="md:col-span-5 backdrop-blur-sm bg-black/40 border border-white/10 rounded-3xl p-8 hover:bg-black/50 hover:border-white/20 transition-all duration-500 shadow-2xl"
+              className="md:col-span-5 backdrop-blur-md bg-black/60 border border-white/10 rounded-3xl p-8 hover:bg-black/70 hover:border-white/20 transition-all duration-500 shadow-2xl"
             >
               <div className="flex items-start justify-between mb-8">
                 <IconMail className="w-8 h-8 text-white/40" />
@@ -215,11 +214,15 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="md:col-span-4 backdrop-blur-sm bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-white/10 rounded-3xl p-8 hover:from-purple-500/20 hover:to-pink-500/20 hover:border-white/20 transition-all duration-500 group shadow-2xl"
+              className="md:col-span-4 backdrop-blur-md bg-gradient-to-br from-purple-900/40 to-pink-900/40 border border-white/10 rounded-3xl p-8 hover:from-purple-900/50 hover:to-pink-900/50 hover:border-white/20 transition-all duration-500 group shadow-2xl"
             >
               <IconBrandInstagram className="w-10 h-10 text-white/60 mb-6 group-hover:scale-110 transition-transform" />
-              <p className="font-['Roboto'] text-2xl font-light text-white">@xpecto_iitmandi</p>
-              <p className="font-['Roboto'] text-white/40 text-sm mt-2">Follow us on Instagram</p>
+              <p className="font-['Roboto'] text-2xl font-light text-white">
+                @xpecto_iitmandi
+              </p>
+              <p className="font-['Roboto'] text-white/40 text-sm mt-2">
+                Follow us on Instagram
+              </p>
             </motion.a>
 
             {/* Leadership Card */}
@@ -228,7 +231,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="md:col-span-8 backdrop-blur-sm bg-black/40 border border-white/10 rounded-3xl p-8 hover:bg-black/50 hover:border-white/20 transition-all duration-500 shadow-2xl"
+              className="md:col-span-8 backdrop-blur-md bg-black/60 border border-white/10 rounded-3xl p-8 hover:bg-black/70 hover:border-white/20 transition-all duration-500 shadow-2xl"
             >
               <span className="text-xs text-white/30 uppercase tracking-widest font-['Roboto']">
                 Leadership
@@ -237,8 +240,12 @@ export default function About() {
                 {conveners.map((person, idx) => (
                   <div key={idx} className="text-center">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-white/10" />
-                    <p className="font-['Roboto'] text-sm font-medium text-white">{person.name}</p>
-                    <p className="font-['Roboto'] text-xs text-white/40 mt-1">{person.role}</p>
+                    <p className="font-['Roboto'] text-sm font-medium text-white">
+                      {person.name}
+                    </p>
+                    <p className="font-['Roboto'] text-xs text-white/40 mt-1">
+                      {person.role}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -270,7 +277,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="md:col-span-12 backdrop-blur-sm bg-black/40 border border-white/10 rounded-3xl p-8 hover:bg-black/50 hover:border-white/20 transition-all duration-500 shadow-2xl"
+              className="md:col-span-12 backdrop-blur-md bg-black/60 border border-white/10 rounded-3xl p-8 hover:bg-black/70 hover:border-white/20 transition-all duration-500 shadow-2xl"
             >
               <div className="flex items-center gap-3 mb-8">
                 <IconCode className="w-6 h-6 text-white/40" />
@@ -283,8 +290,12 @@ export default function About() {
                   <div key={idx} className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400/20 to-purple-400/20 border border-white/10" />
                     <div>
-                      <p className="font-['Roboto'] font-medium text-white">{dev.name}</p>
-                      <p className="font-['Roboto'] text-sm text-white/40">{dev.role}</p>
+                      <p className="font-['Roboto'] font-medium text-white">
+                        {dev.name}
+                      </p>
+                      <p className="font-['Roboto'] text-sm text-white/40">
+                        {dev.role}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -304,7 +315,9 @@ export default function About() {
           >
             <div className="flex items-center gap-4 mb-4">
               <IconUsers className="w-8 h-8 text-white/40" />
-              <h2 className="font-['Michroma'] text-4xl lg:text-5xl font-light text-white">Our Team</h2>
+              <h2 className="font-['Michroma'] text-4xl lg:text-5xl font-light text-white">
+                Our Team
+              </h2>
             </div>
             <p className="font-['Roboto'] text-white/50 text-lg">
               Meet the people who make Xpecto happen
@@ -323,9 +336,9 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="backdrop-blur-sm bg-red-500/10 border border-red-500/20 rounded-3xl p-8 text-center shadow-2xl"
+              className="backdrop-blur-md bg-red-900/40 border border-red-500/20 rounded-3xl p-8 text-center shadow-2xl"
             >
-              <p className="font-['Roboto'] text-red-400">
+              <p className="font-['Roboto'] text-red-200">
                 Unable to load team members. Please try again later.
               </p>
             </motion.div>
@@ -333,9 +346,11 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="backdrop-blur-sm bg-black/40 border border-white/10 rounded-3xl p-8 text-center shadow-2xl"
+              className="backdrop-blur-md bg-black/60 border border-white/10 rounded-3xl p-8 text-center shadow-2xl"
             >
-              <p className="font-['Roboto'] text-white/40">No team members to display yet.</p>
+              <p className="font-['Roboto'] text-white/40">
+                No team members to display yet.
+              </p>
             </motion.div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -346,7 +361,7 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="backdrop-blur-sm bg-black/40 border border-white/10 rounded-3xl p-6 hover:bg-black/50 hover:border-white/20 transition-all duration-500 group shadow-2xl"
+                  className="backdrop-blur-md bg-black/60 border border-white/10 rounded-3xl p-6 hover:bg-black/70 hover:border-white/20 transition-all duration-500 group shadow-2xl"
                 >
                   {/* Member Image */}
                   <div className="relative mb-6">
@@ -363,7 +378,7 @@ export default function About() {
                         </div>
                       )}
                     </div>
-                    
+
                     {/* Corner accents */}
                     <motion.div
                       className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-white/30 rounded-tl-lg opacity-0 group-hover:opacity-100"
@@ -417,7 +432,9 @@ export default function About() {
 
           <div className="max-w-6xl mx-auto px-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
-              <p className="font-['Roboto'] text-sm text-white/30">© 2026 Xpecto, IIT Mandi</p>
+              <p className="font-['Roboto'] text-sm text-white/30">
+                © 2026 Xpecto, IIT Mandi
+              </p>
               <div className="flex items-center gap-6">
                 <a
                   href="mailto:tech@xpecto.org"

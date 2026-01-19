@@ -11,7 +11,7 @@ const AuthContext = createContext(undefined);
 
 // API base URL - adjust based on your backend
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  import.meta.env.VITE_API_URL || "https://xpecto.iitmandi.co.in/api";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

@@ -65,8 +65,8 @@ export default function XpectoSideBar({ children }) {
     <div
       className={cn("flex h-screen w-screen overflow-hidden", "bg-[#050508]")}
     >
-      <Sidebar open={open} setOpen={setOpen} className="border-r border-white/30">
-        <SidebarBody className="bg-transparent">
+      <Sidebar open={open} setOpen={setOpen}>
+        <SidebarBody className="bg-[#050508] z-50 border-r border-white/30">
           {/* Desktop Content */}
           <div className="hidden md:flex flex-1 flex-col overflow-hidden">
             {/* Logo Section */}
@@ -98,7 +98,7 @@ export default function XpectoSideBar({ children }) {
             </Link>
 
             {/* Divider */}
-            <div className="mx-3 h-px bg-linear-to-r from-transparent via-white/6 to-transparent mb-4" />
+            <div className="mx-3 h-px bg-linear-to-r from-[#050508] via-white/6 to-[#050508] mb-4" />
 
             {/* Navigation Links */}
             <nav className="flex flex-col gap-1 flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300">
@@ -132,7 +132,7 @@ export default function XpectoSideBar({ children }) {
 
             {/* Bottom Section */}
             <div className="mt-auto pt-4">
-              <div className="mx-3 h-px bg-linear-to-r from-transparent via-white/6 to-transparent mb-4" />
+              <div className="mx-3 h-px bg-linear-to-r from-[#050508] via-white/6 to-[#050508] mb-4" />
 
               {loading ? (
                 <div className="flex items-center justify-center py-3">
@@ -334,7 +334,7 @@ export default function XpectoSideBar({ children }) {
       </Sidebar>
 
       {/* Main Content */}
-      <main className="relative flex flex-1 overflow-hidden bg-transparent">
+      <main className="relative flex flex-1 overflow-hidden bg-[#050508]">
         <div className="w-full h-full overflow-y-auto overflow-x-hidden">
           {children}
         </div>

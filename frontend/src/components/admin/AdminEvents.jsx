@@ -13,7 +13,7 @@ import {
 } from "@tabler/icons-react";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  import.meta.env.VITE_API_URL || "https://xpecto.iitmandi.co.in/api";
 
 export default function AdminEvents() {
   const [events, setEvents] = useState([]);

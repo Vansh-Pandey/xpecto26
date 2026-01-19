@@ -13,9 +13,17 @@ import { useAuth } from "../context/AuthContext";
 import FloatingElement from "../components/ui/FloatingElement";
 
 const BACKEND_URL =
-  import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api";
+  import.meta.env.BACKEND_URL || "https://xpecto.iitmandi.co.in/api";
 
-const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, registering, registrationCount }) => {
+const EventCard = ({
+  event,
+  isHovered,
+  setIsHovered,
+  onRegister,
+  isRegistered,
+  registering,
+  registrationCount,
+}) => {
   return (
     <motion.div
       className="relative w-full max-w-6xl mx-auto"
@@ -34,7 +42,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
           animate={{
             background: isHovered
               ? "linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.3) 100%)"
-              : "transparent"
+              : "transparent",
           }}
           transition={{ duration: 0.5 }}
         />
@@ -100,7 +108,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                     className="absolute -top-3 -left-3 w-12 h-12 border-t-4 border-l-4 border-white rounded-tl-lg"
                     animate={{
                       opacity: isHovered ? 1 : 0,
-                      scale: isHovered ? 1 : 0.5
+                      scale: isHovered ? 1 : 0.5,
                     }}
                     transition={{ duration: 0.4 }}
                   />
@@ -108,7 +116,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                     className="absolute -bottom-3 -right-3 w-12 h-12 border-b-4 border-r-4 border-white rounded-br-lg"
                     animate={{
                       opacity: isHovered ? 1 : 0,
-                      scale: isHovered ? 1 : 0.5
+                      scale: isHovered ? 1 : 0.5,
                     }}
                     transition={{ duration: 0.4 }}
                   />
@@ -154,7 +162,9 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
               <div>
                 <motion.h3
                   className="font-['Michroma'] text-3xl lg:text-4xl xl:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-blue-300 mb-3 tracking-wide leading-tight"
-                  animate={{ backgroundPosition: isHovered ? "200% center" : "0% center" }}
+                  animate={{
+                    backgroundPosition: isHovered ? "200% center" : "0% center",
+                  }}
                   transition={{ duration: 2, ease: "linear" }}
                   style={{ backgroundSize: "200% auto" }}
                 >
@@ -192,11 +202,21 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                       <motion.div
                         className="absolute inset-0 w-2 h-2 rounded-full bg-white"
                         animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
                       />
                     </div>
                     <span className="font-['Roboto'] text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                      <span className="font-semibold text-white">Date:</span> {new Date(event.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                      <span className="font-semibold text-white">Date:</span>{" "}
+                      {new Date(event.date).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                     </span>
                   </motion.div>
                 )}
@@ -216,36 +236,20 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                       <motion.div
                         className="absolute inset-0 w-2 h-2 rounded-full bg-white"
                         animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.5,
+                        }}
                       />
                     </div>
                     <span className="font-['Roboto'] text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                      <span className="font-semibold text-white">Venue:</span> {event.venue}
+                      <span className="font-semibold text-white">Venue:</span>{" "}
+                      {event.venue}
                     </span>
                   </motion.div>
                 )}
-
-                <motion.div
-                  className="flex items-start gap-4 group"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                >
-                  <div className="relative mt-1">
-                    <motion.div
-                      className="w-2 h-2 rounded-full bg-white"
-                      whileHover={{ scale: 1.5 }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 w-2 h-2 rounded-full bg-white"
-                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    />
-                  </div>
-                  <span className="font-['Roboto'] text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                    <span className="font-semibold text-white">Registrations:</span> {registrationCount} {registrationCount === 1 ? 'participant' : 'participants'}
-                  </span>
-                </motion.div>
               </div>
 
               {/* CTA Button with enhanced design */}
@@ -259,9 +263,11 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
                   transition={{ duration: 0.3 }}
                 >
                   {/* Animated gradient background */}
-                  <div className={`absolute inset-0 ${isRegistered ? 'bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500' : 'bg-gradient-to-r from-white via-gray-100 to-white'} opacity-100`} />
+                  <div
+                    className={`absolute inset-0 ${isRegistered ? "bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500" : "bg-gradient-to-r from-white via-gray-100 to-white"} opacity-100`}
+                  />
                   <motion.div
-                    className={`absolute inset-0 ${isRegistered ? 'bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-400' : 'bg-gradient-to-r from-gray-200 via-white to-gray-200'}`}
+                    className={`absolute inset-0 ${isRegistered ? "bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-400" : "bg-gradient-to-r from-gray-200 via-white to-gray-200"}`}
                     initial={{ x: "100%" }}
                     whileHover={{ x: "-100%" }}
                     transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -269,7 +275,7 @@ const EventCard = ({ event, isHovered, setIsHovered, onRegister, isRegistered, r
 
                   {/* Glow effect */}
                   <motion.div
-                    className={`absolute inset-0 ${isRegistered ? 'bg-emerald-400/40' : 'bg-white/40'} blur-xl`}
+                    className={`absolute inset-0 ${isRegistered ? "bg-emerald-400/40" : "bg-white/40"} blur-xl`}
                     animate={{ opacity: isHovered ? 0.5 : 0 }}
                     transition={{ duration: 0.3 }}
                   />
@@ -473,17 +479,12 @@ export default function Events() {
       {/* Fixed Background Section */}
       <div className="fixed top-0 left-0 w-full h-screen z-0">
         <div className="absolute inset-0">
-          <img
-            src="./bg5.png"
-            alt=""
-            className="w-full h-full object-cover"
-          />
+          <img src="./bg5.png" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
         {/* Fixed Planet - RIGHT CENTER */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-75 md:scale-90 lg:scale-100">
-
           <FloatingElement
             floatIntensity={50}
             duration={12}
@@ -546,7 +547,8 @@ export default function Events() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Join us for extraordinary experiences and groundbreaking competitions
+              Join us for extraordinary experiences and groundbreaking
+              competitions
             </motion.p>
 
             {/* Search Bar */}
@@ -716,10 +718,11 @@ export default function Events() {
                         }}
                         whileHover={{ scale: idx === currentIndex ? 1.3 : 1.1 }}
                         transition={{ duration: 0.3 }}
-                        className={`h-2 rounded-full transition-all duration-500 ${idx === currentIndex
+                        className={`h-2 rounded-full transition-all duration-500 ${
+                          idx === currentIndex
                             ? "w-10 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                             : "w-2 bg-white/30 hover:bg-white/50"
-                          }`}
+                        }`}
                       />
                     ))}
                   </div>

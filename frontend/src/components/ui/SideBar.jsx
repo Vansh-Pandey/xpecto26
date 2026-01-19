@@ -69,8 +69,8 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
     <motion.div
       className={cn(
         "relative h-screen px-4 py-6 hidden md:flex md:flex-col shrink-0",
-        "bg-linear-to-b from-[#0a0a0f] via-[#080810] to-[#050508]",
-        "border-r border-white/4",
+        "bg-gradient-to-b from-[#0a0a0f] via-[#080810] to-[#050508]",
+        "border-r border-white/[0.04]",
         className,
       )}
       animate={{
@@ -85,7 +85,7 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
       {...props}
     >
       {/* Subtle edge highlight */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-linear-to-b from-transparent via-white/6 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-linear-to-b from-[#050508] via-white/[0.06] to-[#050508]" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col">{children}</div>
@@ -105,7 +105,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
       <div
         className={cn(
           "h-14 px-4 flex md:hidden items-center justify-between w-full fixed top-0 left-0 z-50",
-          "bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/4",
+          "bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/[0.04]",
         )}
         {...props}
       >
@@ -123,7 +123,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
         <motion.button
           whileTap={{ scale: 0.92 }}
           onClick={() => setOpen(!open)}
-          className="p-2 rounded-lg hover:bg-white/4 transition-colors"
+          className="p-2 rounded-lg hover:bg-white/[0.04] transition-colors"
         >
           <IconMenu2 className="text-white/70 h-5 w-5" />
         </motion.button>
@@ -137,7 +137,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-90 bg-black/70 backdrop-blur-sm"
+                className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-sm"
                 onClick={() => setOpen(false)}
               />
 
@@ -151,9 +151,9 @@ export const MobileSidebar = ({ className, children, ...props }) => {
                   ease: [0.32, 0.72, 0, 1],
                 }}
                 className={cn(
-                  "fixed inset-y-0 left-0 w-70 z-100 p-5 flex flex-col",
+                  "fixed inset-y-0 left-0 w-[280px] z-[100] p-5 flex flex-col",
                   "bg-[#0a0a0f]",
-                  "border-r border-white/4",
+                  "border-r border-white/[0.04]",
                   className,
                 )}
               >
@@ -163,7 +163,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
                   animate={{ opacity: 1, rotate: 0 }}
                   transition={{ delay: 0.15, duration: 0.2 }}
                   whileTap={{ scale: 0.9 }}
-                  className="absolute right-4 top-4 p-2 rounded-lg bg-white/3 hover:bg-white/6 transition-colors"
+                  className="absolute right-4 top-4 p-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] transition-colors"
                   onClick={() => setOpen(false)}
                 >
                   <IconX className="h-4 w-4 text-white/50" />
@@ -205,7 +205,7 @@ export const SidebarLink = ({ link, className, isActive, ...props }) => {
     >
       {/* Hover background */}
       <motion.div
-        className="absolute inset-0 rounded-xl bg-white/4"
+        className="absolute inset-0 rounded-xl bg-white/[0.04]"
         initial={false}
         animate={{
           opacity: isHovered || isActive ? 1 : 0,
@@ -218,7 +218,7 @@ export const SidebarLink = ({ link, className, isActive, ...props }) => {
       {isActive && (
         <motion.div
           layoutId="activeIndicator"
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-0.75 h-5 rounded-full bg-linear-to-b from-purple-400 to-violet-500"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-full bg-gradient-to-b from-purple-400 to-violet-500"
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         />
       )}
@@ -226,7 +226,7 @@ export const SidebarLink = ({ link, className, isActive, ...props }) => {
       {/* Icon */}
       <motion.div
         className={cn(
-          "relative z-10 shrink-0 transition-colors duration-200",
+          "relative z-10 flex-shrink-0 transition-colors duration-200",
           isActive
             ? "text-purple-300"
             : "text-white/40 group-hover:text-white/70",
